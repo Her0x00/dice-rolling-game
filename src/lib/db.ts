@@ -1,6 +1,5 @@
-import { Pool } from "pg";
+import { Pool, QueryResultRow } from "pg";
 
-// Create a single pool instance
 const pool = new Pool({
   connectionString: process.env.DATABASE_URL,
   ssl: {
@@ -8,8 +7,10 @@ const pool = new Pool({
   },
 });
 
-// Generic query function with typing support
-export async function query<T = any>(text: string, params?: any[]) {
-  const result = await pool.query(text, params);
+export async function query<T extends QueryResultRow = QueryResultRow>(
+  text: string,
+  params?: unknown[]
+) {
+  const result = await pool.query<T>(text, params);
   return result;
 }
