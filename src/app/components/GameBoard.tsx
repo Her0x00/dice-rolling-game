@@ -3,7 +3,6 @@
 import { useState } from 'react';
 import Dice from './Dice';
 import ScoreCard from './ScoreCard';
-import { saveFinalScore } from '@/lib/saveScore';
 
 export default function GameBoard() {
   const [dice, setDice] = useState([
